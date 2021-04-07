@@ -1,23 +1,26 @@
-import React from 'react';
+import React from "react";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Redirect
+  Redirect,
 } from "react-router-dom";
-import './App.scss';
-import Login from './modules/login'
+import "./App.scss";
+import router from "./core/router";
+import initModules from "./modules";
 
 function App() {
+  initModules();
+
   return (
     <div className="App">
       <Router>
         <Switch>
-          <Route path="/">
-            <Login />
-          </Route>
+          {router.getAll().map((item) => (
+            <Route path={item.path}>{item.view}</Route>
+          ))}
           <Route path="*">
-            <Redirect to={{ pathname: '/' }} />
+            <Redirect to={{ pathname: "/login" }} />
           </Route>
         </Switch>
       </Router>
