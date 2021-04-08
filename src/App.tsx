@@ -17,7 +17,9 @@ function App() {
       <Router>
         <Switch>
           {router.getAll().map((item) => (
-            <Route path={item.path}>{item.view}</Route>
+            <Route key={item.path} path={item.path}>
+              {item.view}
+            </Route>
           ))}
           <Route path="*">
             <Redirect to={{ pathname: "/login" }} />
