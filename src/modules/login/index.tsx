@@ -1,9 +1,9 @@
-import router from "../../core/router";
-import Login from "./login";
+import router from 'core/router';
+import Login from './login';
 
 const LoginModule = () => {
   router.addRouter({
-    path: "/login",
+    path: '/login',
     view: <Login />,
   });
 };
