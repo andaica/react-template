@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
-import * as HTTPClient from 'models/base/http_client';
+import Session from 'stores/Session';
 import './login.css';
 
 interface IFormInput {
-  username: String;
-  password: String;
+  username: string;
+  password: string;
 }
 
 function Login() {
@@ -16,9 +16,9 @@ function Login() {
     formState: { errors },
   } = useForm<IFormInput>();
 
-  const onSubmit = (data: IFormInput) => {
+  const onSubmit = async (data: IFormInput) => {
     console.log(data);
-    console.log(HTTPClient.post('api/users/login', data));
+    await Session.login(data.username, data.password);
   };
 
   return (

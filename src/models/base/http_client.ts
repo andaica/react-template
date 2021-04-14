@@ -1,7 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 import axios, { AxiosRequestConfig } from 'axios';
 import { API_ENDPOINT } from 'core/config';
-import { UserToken, setToken, getToken, excludedList } from './auth';
+import { getToken, excludedList } from './auth';
 
 // declare global {
 //   interface Window {
@@ -20,14 +20,14 @@ async function reqInterceptors(
   config: AxiosRequestConfig
 ): Promise<AxiosRequestConfig> {
   if (excludedList.includes(config.url || '')) {
-    return { ...config, headers: { debugid: 0 } };
+    return { ...config };
   }
 
-  // let authToken = getToken();
-  // if (!authToken) {
-  //   // required login
-  //   throw new Error(E_INVALID_ACCESS_TOKEN);
-  // }
+  let authToken = getToken();
+  if (!authToken) {
+    // required login
+    throw new Error(E_INVALID_ACCESS_TOKEN);
+  }
 
   // post/put data modifier
   const data = { ...config.data };
@@ -42,10 +42,6 @@ async function reqInterceptors(
   }
   const newConfig = {
     ...config,
-    headers: {
-      // Authorization: authToken.access_token,
-      'Access-Control-Allow-Origin': '*',
-    },
     data,
   };
 
@@ -56,7 +52,7 @@ export async function request(config: AxiosRequestConfig): Promise<any> {
   try {
     const reqConfig = await reqInterceptors(config);
     const res = await httpClient.request(reqConfig);
-    return res.data.data;
+    return res.data;
   } catch (error) {
     console.log('request error: ', error.response, error);
     if (error.response) {
