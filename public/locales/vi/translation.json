@@ -1,0 +1,17 @@
+{
+  "common": {
+    "button": {
+      "submit": "Gửi"
+    }
+  },
+  "login": {
+    "email": {
+      "label": "Địa chỉ email",
+      "placeholder": "Nhập email.."
+    },
+    "password": {
+      "label": "Mật khẩu",
+      "placeholder": "Nhập mật khẩu.."
+    }
+  }
+}

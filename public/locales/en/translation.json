@@ -1,0 +1,17 @@
+{
+  "common": {
+    "button": {
+      "submit": "Submit"
+    }
+  },
+  "login": {
+    "email": {
+      "label": "Email address",
+      "placeholder": "Enter email.."
+    },
+    "password": {
+      "label": "Password",
+      "placeholder": "Enter password.."
+    }
+  }
+}
