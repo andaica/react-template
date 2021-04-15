@@ -4,6 +4,9 @@
       "submit": "Gửi"
     }
   },
+  "home": {
+    "title": "Trang chủ"
+  },
   "login": {
     "email": {
       "label": "Địa chỉ email",
@@ -12,6 +15,7 @@
     "password": {
       "label": "Mật khẩu",
       "placeholder": "Nhập mật khẩu.."
-    }
+    },
+    "notice": "Chúng tôi sẽ không chia sẻ thông tin của bạn cho bên thứ ba."
   }
 }

@@ -4,6 +4,9 @@
       "submit": "Submit"
     }
   },
+  "home": {
+    "title": "Home"
+  },
   "login": {
     "email": {
       "label": "Email address",
@@ -12,6 +15,7 @@
     "password": {
       "label": "Password",
       "placeholder": "Enter password.."
-    }
+    },
+    "notice": "We'll never share your email with anyone else."
   }
 }
