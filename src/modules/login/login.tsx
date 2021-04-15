@@ -1,16 +1,31 @@
-import React, { useState } from "react";
+import React, { FormEvent } from "react";
+import { observer } from "mobx-react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import "./login.css";
+import userStore from "stores/user/userStore";
+import sessionStore from "stores/session/sessionStore";
+import { logger } from "core/logger";
+import { Redirect } from "react-router-dom";
 
-function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  const handleSubmit = (event: React.FormEvent) => {
-    const state = {email, password}
-    alert("A state was submitted: " + JSON.stringify(state));
-    event.preventDefault();
+const Login = observer(() => {
+  if (sessionStore.isLoggedIn) {
+    return (
+      <Redirect
+        to={{
+          pathname: "/home",
+        }}
+      />
+    );
   }
+
+  const user = userStore.newEmptyUser();
+
+  const handleSubmit = async (event: FormEvent) => {
+    event.preventDefault();
+    const res = await userStore.login();
+    logger.debug("res:", res);
+    logger.debug("isLoggedIn:", sessionStore.isLoggedIn);
+  };
 
   return (
     <Container>
@@ -23,8 +38,8 @@ function Login() {
                 type="email"
                 name="email"
                 placeholder="Enter email"
-                value={email}
-                onChange={event => setEmail(event.target.value)}
+                // value={user.email}
+                onChange={(event) => (user.email = event.target.value)}
               />
               <Form.Text className="text-muted">
                 We'll never share your email with anyone else.
@@ -37,8 +52,8 @@ function Login() {
                 type="password"
                 name="password"
                 placeholder="Password"
-                value={password}
-                onChange={event => setPassword(event.target.value)}
+                // value={user.password}
+                onChange={(event) => (user.password = event.target.value)}
               />
             </Form.Group>
 
@@ -50,6 +65,6 @@ function Login() {
       </Row>
     </Container>
   );
-}
+});
 
 export default Login;
