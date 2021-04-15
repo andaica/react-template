@@ -3,13 +3,20 @@ export type AuthenData = {
   token: string;
 };
 
-function saveAuthenData(data: AuthenData) {
-  localStorage.setItem("authen", JSON.stringify(data));
-}
+const userAuthenKey = "user_authen";
 
-function getAuthenData(): AuthenData {
-  const authenData = localStorage.get("myValueInLocalStorage");
-  return JSON.parse(authenData);
-}
+const saveAuthenData = (data: AuthenData) => {
+  localStorage.setItem(userAuthenKey, JSON.stringify(data));
+};
 
-export default { saveAuthenData, getAuthenData };
+const getAuthenData = (): AuthenData | null => {
+  const authenData = localStorage.getItem(userAuthenKey);
+  return authenData ? JSON.parse(authenData) : null;
+};
+
+const clearAuthenData = () => {
+  localStorage.removeItem(userAuthenKey);
+};
+
+const authen = { saveAuthenData, getAuthenData, clearAuthenData };
+export default authen;

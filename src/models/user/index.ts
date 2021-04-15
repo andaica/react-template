@@ -1,11 +1,12 @@
 import Model from "models/base";
-import authen, { AuthenData } from "models/user/authen";
+import { AuthenData } from "models/user/authen";
 
 export type User = {
   id: number;
   username: string;
   email: string;
   password: string;
+  avatar?: string;
 };
 
 export type LoginParam = {
@@ -13,7 +14,7 @@ export type LoginParam = {
   password: string;
 };
 
-export class UserModel extends Model {
+class UserModel extends Model {
   constructor() {
     super("/users");
   }
@@ -25,8 +26,7 @@ export class UserModel extends Model {
   public async login(params: LoginParam): Promise<AuthenData | null> {
     try {
       const res = await this.http.post("/users/login", params);
-      if (res.status == "OK") {
-        authen.saveAuthenData(res.user);
+      if (res.status === "OK") {
         return res.user;
       } else {
         return null;
@@ -37,3 +37,5 @@ export class UserModel extends Model {
     }
   }
 }
+
+export default new UserModel();
