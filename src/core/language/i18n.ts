@@ -1,9 +1,9 @@
-import i18n from 'i18next';
-import LanguageDetector from 'i18next-browser-languagedetector';
-import { initReactI18next } from 'react-i18next';
+import i18n from 'i18next'
+import LanguageDetector from 'i18next-browser-languagedetector'
+import { initReactI18next } from 'react-i18next'
 
-import en from '../../assets/i18n/locales/en/translation.json';
-import vi from '../../assets/i18n/locales/vi/translation.json';
+import en from '../../assets/i18n/locales/en/translation.json'
+import vi from '../../assets/i18n/locales/vi/translation.json'
 
 const resources = {
   en: {
@@ -12,7 +12,7 @@ const resources = {
   vi: {
     translation: vi,
   },
-};
+}
 
 i18n
   .use(LanguageDetector)
@@ -23,6 +23,6 @@ i18n
     interpolation: {
       escapeValue: false,
     },
-  });
+  })
 
-export default i18n;
+export default i18n
