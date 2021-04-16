@@ -1,32 +1,32 @@
-import { makeObservable, observable, computed, action } from "mobx";
-import authen from "models/user/authen";
+import { makeObservable, observable, computed, action } from 'mobx'
+import authen from 'models/user/authen'
 
 class Session {
-  @observable id = 0;
+  @observable id = 0
 
-  @observable token = "";
+  @observable token = ''
 
   constructor() {
-    makeObservable(this);
+    makeObservable(this)
   }
 
   init(): void {
-    this.loadData();
+    this.loadData()
   }
 
   @action
   loadData = () => {
-    const data = authen.getAuthenData();
+    const data = authen.getAuthenData()
     if (data) {
-      this.id = data.id;
-      this.token = data.token;
+      this.id = data.id
+      this.token = data.token
     }
-  };
+  }
 
   @computed
   public get isLoggedIn(): boolean {
-    return !!this.token;
+    return !!this.token
   }
 }
 
-export default new Session();
+export default new Session()

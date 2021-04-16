@@ -9,7 +9,7 @@ import { logger } from 'core/logger'
 import { Redirect } from 'react-router-dom'
 
 const Login = observer(() => {
-  const { t, i18n } = useTranslation('translation')
+  const { t, i18n } = useTranslation()
   if (sessionStore.isLoggedIn) {
     return (
       <Redirect
