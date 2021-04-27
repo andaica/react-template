@@ -1,28 +1,28 @@
-import { makeObservable, observable } from "mobx";
-import userModel, { User } from "models/user";
-import authen from "models/user/authen";
-import { BaseObject } from "stores/base";
-import { updateField } from "utils/object";
+import { makeObservable, observable } from 'mobx'
+import userModel, { User } from 'models/user'
+import authen from 'models/user/authen'
+import { BaseObject } from 'stores/base'
+import { updateField } from 'utils/object'
 
 export default class UserObject implements BaseObject {
-  @observable id = 0;
+  @observable id = 0
 
-  @observable username = "";
+  @observable username = ''
 
-  @observable email = "";
+  @observable email = ''
 
-  @observable password = "";
+  @observable password = ''
 
-  @observable avatar?: string;
+  @observable avatar?: string
 
   constructor() {
-    makeObservable(this);
+    makeObservable(this)
   }
 
   fromData = (data?: User) => {
-    if (!data) return;
-    updateField(this, data);
-  };
+    if (!data) return
+    updateField(this, data)
+  }
 
   toData = (): User => {
     return {
@@ -31,29 +31,29 @@ export default class UserObject implements BaseObject {
       email: this.email,
       password: this.password,
       avatar: this.avatar,
-    };
-  };
+    }
+  }
 
   fetchDetails(): Promise<void> {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.')
   }
 
   save(data: any): Promise<boolean> {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.')
   }
 
   delete(): Promise<void> {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.')
   }
 
   login = async (): Promise<boolean> => {
     const res = await userModel.login({
       email: this.email,
       password: this.password,
-    });
+    })
     if (res) {
-      authen.saveAuthenData(res);
+      authen.saveAuthenData(res)
     }
-    return !!res;
-  };
+    return !!res
+  }
 }

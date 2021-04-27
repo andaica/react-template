@@ -1,24 +1,25 @@
-import { action, observable, makeObservable } from "mobx";
+import { action, observable, makeObservable } from 'mobx'
 
 export type RouterItem = {
-  path: string;
-  view: React.ReactNode;
-};
+  path: string
+  view: React.ReactNode
+  exact?: boolean
+}
 
 export class Router {
-  @observable routerList: RouterItem[] = [];
+  @observable routerList: RouterItem[] = []
 
   constructor() {
-    makeObservable(this);
+    makeObservable(this)
   }
 
   @action addRouter = (router: RouterItem) => {
-    this.routerList.push(router);
-  };
+    this.routerList.push(router)
+  }
 
   getAll = (): RouterItem[] => {
-    return this.routerList;
-  };
+    return this.routerList
+  }
 }
 
-export default new Router();
+export default new Router()

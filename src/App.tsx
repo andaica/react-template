@@ -1,33 +1,33 @@
-import React from "react";
+import React from 'react'
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Redirect,
-} from "react-router-dom";
-import "./App.scss";
-import router from "./core/router";
-import initModules from "./modules";
+} from 'react-router-dom'
+import './App.scss'
+import router from './core/router'
+import initModules from './modules'
 
 function App() {
-  initModules();
+  initModules()
 
   return (
     <div className="App">
       <Router>
         <Switch>
           {router.getAll().map((item) => (
-            <Route key={item.path} path={item.path}>
+            <Route key={item.path} exact={item.exact} path={item.path}>
               {item.view}
             </Route>
           ))}
           <Route path="*">
-            <Redirect to={{ pathname: "/login" }} />
+            <Redirect to={{ pathname: '/login' }} />
           </Route>
         </Switch>
       </Router>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
